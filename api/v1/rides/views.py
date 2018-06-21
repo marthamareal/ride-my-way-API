@@ -1,59 +1,38 @@
-from flask import Flask, jsonify, Blueprint, request, json
+from flask import Flask, jsonify, Blueprint
+from flask_restful import reqparse
+from .rideModel import rides, RideAPI
 
 app = Flask(__name__)
-blue_print = Blueprint('rides', __name__)
-
-rides = [
-    {
-        "id": 1,
-        "ref_no": "RF0001",
-        "date": "20/02/2018",
-        "time": "11:30 AM"
-
-    },
-    {
-        "id": 2,
-        "ref_no": "RF0001",
-        "date": "20/02/2018",
-        "time": "11:30 AM"
-
-    }
-]
+blue_print_rides = Blueprint('blue_print_rides', __name__)
 
 
-@blue_print.route('/api/v1/rides', methods=['GET'])
+@blue_print_rides.route('/api/v1/rides', methods=['GET'])
 def get_rides():
 
     return jsonify({"rides": rides}), 200
 
 
-@blue_print.route('/api/v1/rides/<int:ride_id>', methods=['GET'])
+@blue_print_rides.route('/api/v1/rides/<int:ride_id>', methods=['GET'])
 def get_ride(ride_id):
-    for ride in rides:
-        if ride.get('id') == ride_id:
-            return jsonify({"ride": ride}), 200
-        continue
+    ride = RideAPI.get_ride(ride_id)
 
-    return "No ride found", 400
+    return jsonify({"ride": ride}), 200
 
 
-@blue_print.route('/api/v1/rides/create', methods=['POST'])
+@blue_print_rides.route('/api/v1/rides/create', methods=['POST'])
 def create_ride():
-    data = request.data
-    json_data = get_data(data)
+    parser = reqparse.RequestParser()
 
-    result = (json_data["rides"]["id"], json_data["rides"]["ref_no"],
-              json_data["rides"]["date"], json_data["rides"]["time"])
+    parser.add_argument("ref_no")
+    parser.add_argument("date")
+    parser.add_argument("time")
+    arguments = parser.parse_args()
 
-    print(result)
+    ride_instance = RideAPI(arguments["ref_no"], arguments["date"], arguments["time"])
+
+    created_ride = RideAPI.create_ride(ride_instance)
+
+    return jsonify({"ride": created_ride}), "Ride was created successfully"
 
 
-"""This data deserializes json
- object"""
 
-
-def get_data(data):
-
-    json_data = json.loads(data)
-    print(json_data)
-    return json_data
