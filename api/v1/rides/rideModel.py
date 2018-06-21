@@ -10,7 +10,7 @@ class RideAPI:
         This method returns all rides created in our list
         """
     def __init__(self, ref_no, date, time):
-        self.ride_id = self.generate_ride_id()
+        self.ride_id = self.generate_id(rides)
         self.ref_no = ref_no
         self.date = date
         self.time = time
@@ -64,7 +64,7 @@ class RideAPI:
     """
 
     @staticmethod
-    def generate_ride_id():
-        if rides:
-            return rides[-1].get("id") + 1
+    def generate_id(_list):
+        if _list:
+            return _list[-1].get("id") + 1
         return 1
