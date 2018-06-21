@@ -9,7 +9,7 @@ class RequestModel:
         self.request_id = RideAPI.generate_id(requests)
         self.user_id = user_id
         self.ride_id = ride_id
-        self.approval = "pending"
+        self.status = "pending"
 
     def create_request(self):
 
@@ -18,6 +18,7 @@ class RequestModel:
             "id": self.request_id,
             "user_id": self.user_id,
             "ride_id": self.ride_id,
+            "status": "pending"
         }
         requests.append(request)
 
@@ -31,3 +32,4 @@ class RequestModel:
             break
 
         return "Ride request not found"
+
