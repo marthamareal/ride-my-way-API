@@ -26,10 +26,10 @@ class RequestModel:
 
     @staticmethod
     def get_request(request_id):
+        global requests
         for request in requests:
             if request.get("id") == request_id:
                 return request
-            break
-
+            continue
         return "Ride request not found"
 

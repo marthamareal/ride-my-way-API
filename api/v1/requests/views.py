@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, jsonify
-from .requestModel import RequestModel
+from .requestModel import RequestModel, requests
 from ..notifications.notificationsModel import NotificationAPI
 from flask_restful import reqparse
 
@@ -27,19 +27,18 @@ def request_ride():
 def approve_request():
     parser = reqparse.RequestParser()
     parser.add_argument("request_id")
+    parser.add_argument("user_id")
     parser.add_argument("approval")
     args = parser.parse_args()
 
-    request = RequestModel.get_request(args("request_id"))
+    # print(args)
+    request = RequestModel.get_request(args['request_id'])
 
-    request["status"] = args["approval"]
-
-    if args("approval"):
+    if args["approval"]:
         message = "Your request has been accepted"
     else:
         message = "Your request has been rejected"
 
-    notification = NotificationAPI(request["user_id"], message)
-    NotificationAPI.create_notification(notification)
+    notification = NotificationAPI.create_notification(NotificationAPI(args['user_id'], message))
 
-    return jsonify({"request": notification}), "Request approval updated"
+    return jsonify({"notification": notification}, {"request": request}), "Request approval updated"
