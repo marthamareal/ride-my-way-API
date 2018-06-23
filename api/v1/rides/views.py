@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, Blueprint
 from flask_restful import reqparse
-from .rideModel import rides, RideAPI
+from .model import rides, RideAPI
 
 app = Flask(__name__)
 blue_print_rides = Blueprint('blue_print_rides', __name__)
@@ -32,7 +32,7 @@ def create_ride():
 
     created_ride = RideAPI.create_ride(ride_instance)
 
-    return jsonify({"ride": created_ride}), "Ride was created successfully"
+    return jsonify({"ride": created_ride}), 200
 
 
 

@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, jsonify
-from .requestModel import RequestModel, requests
-from ..notifications.notificationsModel import NotificationAPI
+from .model import RequestModel
+from ..notifications.model import NotificationAPI
 from flask_restful import reqparse
 
 app = Flask(__name__)
@@ -31,14 +31,21 @@ def approve_request():
     parser.add_argument("approval")
     args = parser.parse_args()
 
-    # print(args)
     request = RequestModel.get_request(args['request_id'])
 
-    if args["approval"]:
-        message = "Your request has been accepted"
+    if type(request) is str:
+
+        return request
+
     else:
-        message = "Your request has been rejected"
 
-    notification = NotificationAPI.create_notification(NotificationAPI(args['user_id'], message))
+        request['status'] = args['approval']
 
-    return jsonify({"notification": notification}, {"request": request}), "Request approval updated"
+        if str(args["approval"]).title() == "Yes":
+            message = "Your request has been accepted"
+        else:
+            message = "Your request has been rejected"
+
+        notification = NotificationAPI.create_notification(NotificationAPI(args['user_id'], message))
+
+        return jsonify({"notification": notification}, {"request": request}), "Request approval updated"

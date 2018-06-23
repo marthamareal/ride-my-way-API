@@ -1,4 +1,4 @@
-from ..rides.rideModel import RideAPI
+from ..rides.model import RideAPI
 
 requests = []
 
@@ -16,8 +16,8 @@ class RequestModel:
         request = {
 
             "id": self.request_id,
-            "user_id": self.user_id,
-            "ride_id": self.ride_id,
+            "user_id": int(self.user_id),
+            "ride_id": int(self.ride_id),
             "status": "pending"
         }
         requests.append(request)
@@ -27,8 +27,9 @@ class RequestModel:
     @staticmethod
     def get_request(request_id):
         global requests
+
         for request in requests:
-            if request.get("id") == request_id:
+            if request.get("id") == int(request_id):
                 return request
             continue
         return "Ride request not found"

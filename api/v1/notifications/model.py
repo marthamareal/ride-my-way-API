@@ -1,4 +1,4 @@
-from ..rides.rideModel import RideAPI
+from ..rides.model import RideAPI
 
 
 notifications = []

@@ -1,7 +1,6 @@
 from flask import Flask, Blueprint, jsonify
-from flask_restful import reqparse
 
-from .notificationsModel import NotificationAPI
+from .model import NotificationAPI
 
 app = Flask(__name__)
 
