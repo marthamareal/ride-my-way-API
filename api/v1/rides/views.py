@@ -38,4 +38,11 @@ def get_ride(ride_id):
     return jsonify({"ride": ride}), 200
 
 
+@blue_print_rides.route('/api/v1/rides/delete/<int:ride_id>', methods=['DELETE'])
+def delete_ride(ride_id):
+    remaining_rides = RideModel.delete_ride(ride_id)
+    if type(remaining_rides) == str:
+        return remaining_rides, 400
+    return jsonify({'remaining_rides': remaining_rides}), 200
+
 

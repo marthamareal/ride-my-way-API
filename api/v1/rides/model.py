@@ -38,7 +38,6 @@ class RideModel:
         """
                 This method returns a particular ride of the id given to it from the list of available rides
         """
-        global rides
 
         for ride in rides:
             if ride.get('id') == ride_id:
@@ -52,11 +51,17 @@ class RideModel:
         """
                 This method returns all ride created in our list above
         """
-        global rides
-
         if rides:
             return rides
-        return "No ride_requests Found"
+        return "No ride Found"
+
+    @staticmethod
+    def delete_ride(ride_id):
+        for count, ride in enumerate(rides):
+            if ride.get("id") == ride_id:
+                rides.pop(count)
+                return rides
+        return "Ride not Found"
 
     @staticmethod
     def generate_id(_list):

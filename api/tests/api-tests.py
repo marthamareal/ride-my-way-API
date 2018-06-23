@@ -37,6 +37,12 @@ class TestCases(unittest.TestCase):
         self.assertEqual(results, {"rides": [self.create_sample_ride(1, "R0027", "10/02/2009", "10:00 AM")]})
         self.assertEqual(response.status_code, 200)
 
+    def test_l_delete_ride(self):
+        response = self.test_client.delete('/api/v1/rides/delete/1')
+        results = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(results, {"remaining_rides": []})
+
     # REQUEST SECTION
 
     def test_create_ride_request(self):
