@@ -1,18 +1,25 @@
-from ..rides.model import RideAPI
-
-
+from ..rides.model import RideModel
+"""
+Declare a global variable list which will hold our notifications, initially its empty.
+"""
 notifications = []
 
 
-class NotificationAPI:
+class NotificationModel:
 
     def __init__(self, user_id, message):
-        self.notification_id = RideAPI.generate_id(notifications)
+        """
+                This method acts as a constructor for our class, its used to initialise class attributes
+        """
+
+        self.notification_id = RideModel.generate_id(notifications)
         self.user_id = user_id
         self.message = message
 
     def create_notification(self):
-
+        """
+                 This method receives an object of the class, creates and returns a dictionary from the object
+        """
         notification = {
 
             "id": self.notification_id,
@@ -27,7 +34,9 @@ class NotificationAPI:
 
     @staticmethod
     def get_notifications():
-
+        """
+                This method returns all notifications created in our notifications list above
+        """
         if notifications:
             return notifications
         return "No Notifications found"
