@@ -61,3 +61,14 @@ class RideRequestModel:
         else:
             return "No ride requests found"
 
+    @staticmethod
+    def delete_request(request_id):
+        """
+                This method deletes a request which has a provided id
+        """
+        for count, request in enumerate(ride_requests):
+
+            if request.get("id") == request_id:
+                ride_requests.pop(count)
+                return ride_requests
+        return "Request not Found"

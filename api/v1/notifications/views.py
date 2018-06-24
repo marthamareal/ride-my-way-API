@@ -15,3 +15,12 @@ def get_notifications():
                 return notifications, 400
         else:
                 return jsonify({"notifications": notifications}), 200
+
+
+@blue_print_notifications.route('/api/v1/notifications/delete/<int:notification_id>', methods=['DELETE'])
+def delete_notification(notification_id):
+    remaining_notifications = NotificationModel.delete_notification(notification_id)
+    if type(remaining_notifications) == str:
+        return remaining_notifications, 400
+    else:
+        return jsonify({'remaining_notifications': remaining_notifications}), 200
