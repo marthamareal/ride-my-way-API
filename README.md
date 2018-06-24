@@ -6,15 +6,20 @@
 
 It is built using python and flask
 
-#Installation
+# Installation
 
 create a virtual environment with (virtualenv yourEnv).
+
 Activate the virtual environment. (source yourEnv/bin/activate)
+
 install python (pip install python)
+
 Install Flask (pip install flask)
+
 Install requirements (pip freeze > requirements.txt)
 
-#Deployment
+# Deployment
+
 Application is deployed using Heroku.
 
-checkout on [![View App] (https://ride-my-way-v1-api.herokuapp.com)]
+checkout on [![View App](https://ride-my-way-v1-api.herokuapp.com)]
