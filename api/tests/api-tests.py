@@ -33,9 +33,15 @@ class TestCases(unittest.TestCase):
     def test_get_rides(self):
 
         response = self.test_client.get('/api/v1/rides')
-        results = json.loads(response.data.decode())
-        self.assertEqual(results, {"rides": [self.create_sample_ride(1, "R0027", "10/02/2009", "10:00 AM")]})
-        self.assertEqual(response.status_code, 200)
+
+        if type(response.data) == str:
+
+            self.assertEqual(response.status_code, 400)
+        else:
+            results = json.loads(response.data.decode())
+            print(response.data.decode())
+            self.assertEqual(results, {"rides": [self.create_sample_ride(1, "R0027", "10/02/2009", "10:00 AM")]})
+            self.assertEqual(response.status_code, 200)
 
     def test_l_delete_ride(self):
         response = self.test_client.delete('/api/v1/rides/delete/1')

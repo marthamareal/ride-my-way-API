@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, Blueprint
 from flask_restful import reqparse
-from .model import rides, RideModel
+from .model import RideModel
 
 app = Flask(__name__)
 blue_print_rides = Blueprint('blue_print_rides', __name__)
@@ -8,8 +8,11 @@ blue_print_rides = Blueprint('blue_print_rides', __name__)
 
 @blue_print_rides.route('/api/v1/rides', methods=['GET'])
 def get_rides():
-
-    return jsonify({"rides": rides}), 200
+    rides = RideModel.get_rides()
+    if type(rides) == str:
+        return rides, 400
+    else:
+        return jsonify({"rides": rides}), 200
 
 
 @blue_print_rides.route('/api/v1/rides/create', methods=['POST'])
