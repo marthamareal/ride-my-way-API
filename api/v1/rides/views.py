@@ -1,3 +1,4 @@
+from flasgger import swag_from
 from flask import Flask, jsonify, Blueprint
 from flask_restful import reqparse
 from .model import RideModel
@@ -6,6 +7,7 @@ app = Flask(__name__)
 blue_print_rides = Blueprint('blue_print_rides', __name__)
 
 
+@swag_from('/api/apidocs/get_rides.yml')
 @blue_print_rides.route('/api/v1/rides', methods=['GET'])
 def get_rides():
     rides = RideModel.get_rides()
@@ -15,6 +17,7 @@ def get_rides():
         return jsonify({"rides": rides}), 200
 
 
+@swag_from('/api/apidocs/create_ride.yml')
 @blue_print_rides.route('/api/v1/rides/create', methods=['POST'])
 def create_ride():
     parser = reqparse.RequestParser()
@@ -31,6 +34,7 @@ def create_ride():
     return jsonify({"ride": created_ride}), 200
 
 
+@swag_from('/api/apidocs/get_ride.yml')
 @blue_print_rides.route('/api/v1/rides/<int:ride_id>', methods=['GET'])
 def get_ride(ride_id):
     ride = RideModel.get_ride(ride_id)
@@ -41,6 +45,7 @@ def get_ride(ride_id):
     return jsonify({"ride": ride}), 200
 
 
+@swag_from('/api/apidocs/delete_ride.yml')
 @blue_print_rides.route('/api/v1/rides/delete/<int:ride_id>', methods=['DELETE'])
 def delete_ride(ride_id):
     remaining_rides = RideModel.delete_ride(ride_id)

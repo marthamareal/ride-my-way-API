@@ -20,6 +20,8 @@ Install requirements (pip freeze > requirements.txt)
 
 # Deployment
 
+install flassger (pip install flasgger) for presenting the api
+
 Application is deployed using Heroku.
 
 checkout on [View App](https://ride-my-way-v1-api.herokuapp.com)

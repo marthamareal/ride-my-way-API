@@ -1,0 +1,19 @@
+Endpoint retrieving a list of all rides
+---
+  tags:
+    - Rides
+  definitions:
+    Ride:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        ref_no:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+          format: time
