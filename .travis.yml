@@ -9,7 +9,7 @@ install:
     - pip install coveralls
 
 script:
-    - nosetests --with-coverage
+    - nosetests api.tests --with-coverage
 
 after_success:
     - coveralls
