@@ -58,3 +58,12 @@ def get_ride_requests():
         return ride_requests, 400
     else:
         return jsonify({"ride_requests": ride_requests}), 200
+
+
+@blue_print_ride_requests.route('/api/v1/rides/ride_requests/delete/<int:request_id>', methods=['DELETE'])
+def delete_request(request_id):
+    remaining_requests = RideRequestModel.delete_request(request_id)
+    if type(remaining_requests) == str:
+        return remaining_requests, 400
+    else:
+        return jsonify({'remaining_requests': remaining_requests}), 200

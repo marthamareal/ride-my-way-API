@@ -40,3 +40,14 @@ class NotificationModel:
         if notifications:
             return notifications
         return "No Notifications found"
+
+    @staticmethod
+    def delete_notification(notification_id):
+        """
+                This method deletes a notification which has a provided id
+        """
+        for count, notification in enumerate(notifications):
+            if notification.get("id") == notification_id:
+                notifications.pop(count)
+                return notifications
+        return "Notification not Found"

@@ -49,6 +49,21 @@ class TestCases(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(results, {"remaining_rides": []})
 
+    def test_l_delete_request(self):
+        response = self.test_client.delete('/api/v1/rides/ride_requests/delete/1')
+        results = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(results, {"remaining_requests": []})
+
+    def test_l_delete_notification(self):
+        response = self.test_client.delete('/api/v1/notifications/delete/1')
+        if type(response.data.decode()) == str:
+            self.assertEqual(response.status_code, 400)
+        else:
+            results = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(results, {"remaining_notifications": []})
+
     # REQUEST SECTION
 
     def test_create_ride_request(self):

@@ -57,6 +57,9 @@ class RideModel:
 
     @staticmethod
     def delete_ride(ride_id):
+        """
+                This method deletes a ride which has a provided id
+        """
         for count, ride in enumerate(rides):
             if ride.get("id") == ride_id:
                 rides.pop(count)
