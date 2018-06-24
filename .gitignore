@@ -1,3 +1,6 @@
 
 .idea
 myEnv
+__pycache__
+.vscode
+.cache
