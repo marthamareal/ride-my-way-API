@@ -23,7 +23,6 @@ omit =
     *jinja2/*
     *jsonschema/*
     *flask/*
-    *travis/*
     *flask_restful/*
     *click/*
     *flasgger/*
