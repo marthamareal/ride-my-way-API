@@ -46,4 +46,6 @@ omit =
     *requests/sessions.py
     *requests/status_codes.py
     *requests/structures.py
+    *requests/utils
+    *requests/__init.py
     *certifi/*
