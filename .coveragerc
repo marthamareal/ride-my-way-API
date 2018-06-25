@@ -28,4 +28,5 @@ omit =
     *flasgger/*
     *markupsafe/*
     *markupsafe/*
+    */venv/*
     *api/v1/__init__.py
