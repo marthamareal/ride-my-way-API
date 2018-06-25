@@ -31,19 +31,4 @@ omit =
     *chardet/*
     *urllib3/*
     *idna/*
-    *requests/__version__.py
-    *requests/_internal_utils.py
-    *requests/adapters.py
-    *requests/api.py
-    *requests/auth.py
-    *requests/certs.py
-    *requests/compat.py
-    *requests/cookies.py
-    *requests/exceptions.py
-    *requests/hooks.py
-    *requests/models.py
-    *requests/packages.py
-    *requests/sessions.py
-    *requests/status_codes.py
-    *requests/structures.py
-    *certifi/*
+    *api/v1/__init__.py
