@@ -30,4 +30,6 @@ omit =
     *markupsafe/*
     *chardet/*
     *urllib3/*
+    *idna/*
+    *requests/*
     *api/v1/__init__.py
