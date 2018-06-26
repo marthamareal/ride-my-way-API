@@ -16,12 +16,11 @@ template = {
         "description": "This is a web api built in flask. and you can test its endpoints from here. Enjoy my API"
     }
 }
-
 Swagger(app, template=template)
+
 
 @app.route('/')
 def index():
-
     return redirect('/apidocs/')
 
 
