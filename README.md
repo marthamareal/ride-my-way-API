@@ -18,7 +18,7 @@ Install Flask (pip install flask)
 
 Install requirements (pip freeze > requirements.txt)
 
-#EndPoints In The API
+# Endpoints In The API
 
 |REQUEST TYPE| URL | DESCRIPTION |
 |------------|-----|-------------|
