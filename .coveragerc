@@ -32,4 +32,4 @@ omit =
     *urllib3/*
     *idna/*
     */requests/*
-    */home/travis/virtualenv/*
+    */home/travis/*
