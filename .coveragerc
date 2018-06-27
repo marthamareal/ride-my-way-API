@@ -31,6 +31,5 @@ omit =
     *chardet/*
     *urllib3/*
     *idna/*
-    */requests/__init__.py
-    */requests/util.py
+    */requests/*
     */home/travis/*
