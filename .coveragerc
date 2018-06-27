@@ -9,7 +9,7 @@ omit =
     *encodings/*
     *hmac.py
     *html/*
-    *http/cookiejar.py
+    *http/*
     *mimetypes.py
     *multiprocessing/*
     *numbers.py
@@ -28,4 +28,8 @@ omit =
     *flasgger/*
     *markupsafe/*
     *markupsafe/*
+    *chardet/*
+    *urllib3/*
+    *idna/*
+    */requests/*
     *api/v1/__init__.py
