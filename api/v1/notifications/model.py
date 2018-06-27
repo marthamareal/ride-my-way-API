@@ -6,12 +6,10 @@ notifications = []
 
 
 class NotificationModel:
-
     def __init__(self, user_id, message):
         """
                 This method acts as a constructor for our class, its used to initialise class attributes
         """
-
         self.notification_id = RideModel.generate_id(notifications)
         self.user_id = user_id
         self.message = message
@@ -21,15 +19,11 @@ class NotificationModel:
                  This method receives an object of the class, creates and returns a dictionary from the object
         """
         notification = {
-
             "id": self.notification_id,
             "user_id": self.user_id,
             "message": self.message
-
         }
-
         notifications.append(notification)
-
         return notification
 
     @staticmethod

@@ -1,9 +1,7 @@
-from flask import Flask, Blueprint, jsonify
+from flask import Blueprint, jsonify
+from flask_restful import reqparse
 from .model import RideRequestModel
 from ...notifications.model import NotificationModel
-from flask_restful import reqparse
-
-app = Flask(__name__)
 
 blue_print_ride_requests = Blueprint('blue_print_ride_requests', __name__)
 
@@ -11,15 +9,11 @@ blue_print_ride_requests = Blueprint('blue_print_ride_requests', __name__)
 @blue_print_ride_requests.route('/api/v1/requests/request_ride', methods=['POST'])
 def create_ride_request():
     parser = reqparse.RequestParser()
-
     parser.add_argument("user_id")
     parser.add_argument("ride_id")
-
     arguments = parser.parse_args()
-
     instance = RideRequestModel(arguments["user_id"], arguments["user_id"])
     request = RideRequestModel.create_request(instance)
-
     return jsonify({"ride_request": request}), 200
 
 
@@ -30,24 +24,16 @@ def approve_ride_request():
     parser.add_argument("user_id")
     parser.add_argument("approval")
     args = parser.parse_args()
-
     request = RideRequestModel.get_request(args['request_id'])
-
     if type(request) is str:
-
         return request, 400
-
     else:
-
         request['status'] = args['approval']
-
         if str(args["approval"]).title() == "Yes":
             message = "Your request has been accepted"
         else:
             message = "Your request has been rejected"
-
         notification = NotificationModel.create_notification(NotificationModel(args['user_id'], message))
-
         return jsonify({"notification": notification, "ride_request": request}), 200
 
 
@@ -61,7 +47,7 @@ def get_ride_requests():
 
 
 @blue_print_ride_requests.route('/api/v1/rides/ride_requests/delete/<int:request_id>', methods=['DELETE'])
-def delete_request(request_id):
+def delete_ride_request(request_id):
     remaining_requests = RideRequestModel.delete_request(request_id)
     if type(remaining_requests) == str:
         return remaining_requests, 400

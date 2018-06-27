@@ -6,7 +6,7 @@
 
 It is built using python and flask
 
-# Installation
+## Installation
 
 create a virtual environment with (virtualenv yourEnv).
 
@@ -18,7 +18,7 @@ Install Flask (pip install flask)
 
 Install requirements (pip freeze > requirements.txt)
 
-# Deployment
+## Deployment
 
 install flassger (pip install flasgger) for presenting the api
 
