@@ -18,9 +18,24 @@ Install Flask (pip install flask)
 
 Install requirements (pip freeze > requirements.txt)
 
+# Endpoints in the API
+
+|REQUEST TYPE| URL | DESCRIPTION |
+|------------|-----|-------------|
+|POST| /api/v1/rides/create |Create ride offer|
+|GET| /api/v1/rides |Get all ride offers|
+|GET| /api/v1/rides/<int:ride_id> |Get specific ride|
+|POST| /api/v1/rides/create |Request to join ride|
+|GET| /api/v1/ride_requests/requests |Get all ride requests|
+|POST| /api/v1/requests/ride_requests/approve |Approve ride request|
+|GET| /api/v1/notifications |Get all notifications|
+|DELETE| /api/v1/rides/delete/<int:ride_id>|Delete ride offer|
+|DELETE| /api/v1/rides/ride_requests/delete/<int:request_id> |Delete ride request|
+|DELETE| /api/v1/notifications/delete/<int:notification_id> |Delete notification|
+
 ## Deployment
 
-install flassger (pip install flasgger) for presenting the api
+install flassger (pip install flasgger) for documenting the api
 
 Application is deployed using Heroku.
 
