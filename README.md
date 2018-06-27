@@ -6,7 +6,7 @@
 
 It is built using python and flask
 
-# Installation
+## Installation
 
 create a virtual environment with (virtualenv yourEnv).
 
@@ -18,7 +18,7 @@ Install Flask (pip install flask)
 
 Install requirements (pip freeze > requirements.txt)
 
-# Endpoints In The API
+# Endpoints in the API
 
 |REQUEST TYPE| URL | DESCRIPTION |
 |------------|-----|-------------|
@@ -33,7 +33,7 @@ Install requirements (pip freeze > requirements.txt)
 |DELETE| /api/v1/rides/ride_requests/delete/<int:request_id> |Delete ride request|
 |DELETE| /api/v1/notifications/delete/<int:notification_id> |Delete notification|
 
-# Deployment
+## Deployment
 
 install flassger (pip install flasgger) for documenting the api
 

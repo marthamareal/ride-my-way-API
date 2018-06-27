@@ -6,12 +6,10 @@ rides = []
 
 
 class RideModel:
-
     def __init__(self, ref_no, date, time):
         """
                 This method acts as a constructor for our class, its used to initialise class attributes
         """
-
         self.ride_id = self.generate_id(rides)
         self.ref_no = ref_no
         self.date = date
@@ -21,16 +19,13 @@ class RideModel:
         """
                 This method receives an object of the class, creates and returns a dictionary from the object
         """
-
         ride = {
             "id": self.ride_id,
             "ref_no": self.ref_no,
             "date": self.date,
             "time": self.time
         }
-
         rides.append(ride)
-
         return ride
 
     @staticmethod
@@ -38,12 +33,10 @@ class RideModel:
         """
                 This method returns a particular ride of the id given to it from the list of available rides
         """
-
         for ride in rides:
             if ride.get('id') == ride_id:
                 return ride
             continue
-
         return "Requested ride is not found"
 
     @staticmethod
