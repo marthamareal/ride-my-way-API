@@ -6,14 +6,14 @@ ride_requests = []
 
 
 class RideRequestModel:
-    def __init__(self, user_id, ride_id):
+    def __init__(self, user_id, ride_id, status):
         """
                This method acts as a constructor for our class, its used to initialise class attributes
         """
         self.request_id = RideModel.generate_id(ride_requests)
         self.user_id = user_id
         self.ride_id = ride_id
-        self.status = "pending"
+        self.status = status
 
     def create_request(self):
         """
@@ -23,7 +23,7 @@ class RideRequestModel:
             "id": self.request_id,
             "user_id": int(self.user_id),
             "ride_id": int(self.ride_id),
-            "status": "pending"
+            "status": self.status
         }
         ride_requests.append(request)
         return request
@@ -38,17 +38,21 @@ class RideRequestModel:
             if request.get("id") == int(request_id):
                 return request
             continue
-        return "Ride request not found"
+        return {"error": "Ride request not found"}
 
     @staticmethod
-    def get_requests():
+    def get_requests(ride_id):
         """
-             This method returns all requests created in our ride_requests list declared above
+             This method returns all requests created on a ride
         """
         if ride_requests:
-            return ride_requests
+            for req in ride_requests:
+                if req.get("ride_id") == ride_id:
+                    return ride_requests
+                else:
+                    return {"error": "ride  has no requests "}
         else:
-            return "No ride requests found"
+            return {"message": "No requests found"}
 
     @staticmethod
     def delete_request(request_id):
@@ -59,4 +63,4 @@ class RideRequestModel:
             if request.get("id") == request_id:
                 ride_requests.pop(count)
                 return ride_requests
-        return "Request not Found"
+        return {"error": "Request not Found"}

@@ -1,5 +1,4 @@
 from api.v1.rides.model import RideModel
-
 users = []
 
 
@@ -31,13 +30,13 @@ class UserModel:
         for user in users:
             if user.get("id") == _id:
                 return user
-        return "User not Found"
+        return {"error": "User not Found"}
 
     @staticmethod
     def get_users():
         if users:
             return users
-        return
+        return {"error": "No users Found"}
 
     @staticmethod
     def delete_user(user_id):
@@ -48,4 +47,4 @@ class UserModel:
             if user.get("id") == user_id:
                 users.pop(count)
                 return users
-        return "Ride not Found"
+        return {"error": "user not Found"}

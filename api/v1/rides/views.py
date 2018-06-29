@@ -2,6 +2,8 @@ from flasgger import swag_from
 from flask import jsonify, Blueprint
 from flask_restful import reqparse
 from .model import RideModel
+from ..users.model import users
+
 blue_print_rides = Blueprint('blue_print_rides', __name__)
 
 
@@ -9,25 +11,45 @@ blue_print_rides = Blueprint('blue_print_rides', __name__)
 @blue_print_rides.route('/api/v1/rides', methods=['GET'])
 def get_all_rides():
     rides = RideModel.get_rides()
-    if type(rides) == str:
-        return rides, 400
-    else:
-        return jsonify({"rides": rides}), 200
+    return jsonify({"rides": rides}), 200
 
 
 @swag_from('/api/apidocs/create_ride.yml')
-@blue_print_rides.route('/api/v1/rides/create', methods=['POST'])
-def _create_ride():
+@blue_print_rides.route('/api/v1/rides/create/<int:user_id>', methods=['POST'])
+def _create_ride(user_id):
     parser = reqparse.RequestParser()
     parser.add_argument("ref_no")
     parser.add_argument("date")
     parser.add_argument("time")
+    parser.add_argument("source")
+    parser.add_argument("destination")
+    parser.add_argument("user_id")
     arguments = parser.parse_args()
 
-    ride_instance = RideModel(arguments["ref_no"], arguments["date"], arguments["time"])
-    created_ride = RideModel.create_ride(ride_instance)
+    for user in users:
+        if user.get("id") == user_id:
 
-    return jsonify({"ride": created_ride}), 200
+            ride_instance = RideModel(arguments["ref_no"], arguments["date"],
+                                      arguments["time"], arguments["source"], arguments["destination"], user_id)
+            created_ride = RideModel.create_ride(ride_instance)
+
+            return jsonify({"ride": created_ride}), 200
+    return jsonify({"error": "User not found"}), 400
+
+
+@blue_print_rides.route('/api/v1/rides/update/<int:ride_id>', methods=['PUT'])
+def update_ride_offer(ride_id):
+    parser = reqparse.RequestParser()
+    parser.add_argument("date")
+    parser.add_argument("time")
+    parser.add_argument("source")
+    parser.add_argument("destination")
+    arguments = parser.parse_args()
+
+    updated = RideModel.update(ride_id, arguments["date"],
+                               arguments["time"], arguments["source"], arguments["destination"])
+
+    return jsonify({"updated ride": updated}), 200
 
 
 @swag_from('/api/apidocs/get_ride.yml')
@@ -43,8 +65,6 @@ def get_one_ride(ride_id):
 @blue_print_rides.route('/api/v1/rides/delete/<int:ride_id>', methods=['DELETE'])
 def delete_one_ride(ride_id):
     remaining_rides = RideModel.delete_ride(ride_id)
-    if type(remaining_rides) == str:
-        return remaining_rides, 400
     return jsonify({'remaining_rides': remaining_rides}), 200
 
 
