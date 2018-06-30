@@ -32,4 +32,5 @@ omit =
     *urllib3/*
     *idna/*
     */requests/*
+    *model.py
     */home/travis/virtualenv/*

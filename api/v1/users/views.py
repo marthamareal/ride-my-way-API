@@ -50,3 +50,17 @@ def delete_user(user_id):
     return jsonify({'remaining_users': remaining_users}), 200
 
 
+@blue_print_users.route('/api/v1/users/update/<int:user_id>', methods=['PUT'])
+def update_user(user_id):
+    parser = reqparse.RequestParser()
+    parser.add_argument("f_name")
+    parser.add_argument("l_name")
+    parser.add_argument("email")
+    parser.add_argument("phone_no")
+    parser.add_argument("city")
+    arguments = parser.parse_args()
+
+    updated = UserModel.update(user_id, arguments["f_name"], arguments["l_name"], arguments["email"],
+                              arguments["city"], arguments["phone_no"])
+
+    return jsonify({"updated user": updated}), 200

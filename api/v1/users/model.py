@@ -1,11 +1,10 @@
-from api.v1.rides.model import RideModel
-
+from api.v1 import generate_id
 users = []
 
 
 class UserModel:
     def __init__(self, f_name, l_name, email, city, phone_no, password):
-        self.id = RideModel.generate_id(users)
+        self.id = generate_id(users)
         self.f_name = f_name
         self.l_name = l_name
         self.email = email
@@ -31,13 +30,13 @@ class UserModel:
         for user in users:
             if user.get("id") == _id:
                 return user
-        return "User not Found"
+        return {"error": "User not Found"}
 
     @staticmethod
     def get_users():
         if users:
             return users
-        return
+        return {"error": "No users Found"}
 
     @staticmethod
     def delete_user(user_id):
@@ -48,4 +47,16 @@ class UserModel:
             if user.get("id") == user_id:
                 users.pop(count)
                 return users
-        return "Ride not Found"
+        return {"error": "user not Found"}
+
+    @staticmethod
+    def update(user_id, f_name, l_name, email, city, phone_no):
+        for user in users:
+            if user.get("id") == user_id:
+                user["f_name"] = f_name
+                user["l_name"] = l_name
+                user["email"] = email
+                user["city"] = city
+                user["phone_no"] = phone_no
+                return user
+        return {"user": "user not found"}
