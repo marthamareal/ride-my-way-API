@@ -1,0 +1,22 @@
+version: "1"
+checks:
+  argument-count:
+    config:
+      threshold: 9
+  complex-logic:
+    config:
+      threshold: 4
+  file-lines:
+    config:
+      threshold: 200
+  method-complexity:
+    config:
+      threshold: 5
+  method-count:
+    config:
+      threshold: 20
+  nested-control-flow:
+    config:
+      threshold: 5
+  exclude_patterns:
+    - "tests/"
