@@ -1,17 +1,20 @@
 """
 Declare a global variable list which will hold our rides, initially its empty.
 """
+from random import randint
+
+from api.v1 import generate_id
 
 rides = []
 
 
 class RideModel:
-    def __init__(self, ref_no, date, time, source, destination, user_id):
+    def __init__(self, date, time, source, destination, user_id):
         """
                 This method acts as a constructor for our class, its used to initialise class attributes
         """
-        self.ride_id = self.generate_id(rides)
-        self.ref_no = ref_no
+        self.ride_id = generate_id(rides)
+        self.ref_no = self.generate_ref_no()
         self.date = date
         self.time = time
         self.source = source
@@ -25,7 +28,6 @@ class RideModel:
         """
                 This method receives an object of the class, creates and returns a dictionary from the object
         """
-
         ride = {
             "id": self.ride_id,
             "ref_no": self.ref_no,
@@ -71,16 +73,6 @@ class RideModel:
         return rides
 
     @staticmethod
-    def generate_id(_list):
-        """
-                This method auto generates ids for the ride_requests by starting from 1
-                if first ride in list and increment 1 from the last ride in list
-        """
-        if _list:
-            return _list[-1].get("id") + 1
-        return 1
-
-    @staticmethod
     def update(ride_id, date, time, source, destination):
         for ride in rides:
             if ride.get("id") == ride_id:
@@ -91,3 +83,7 @@ class RideModel:
                 return ride
         return {"ride": "ride not found"}
 
+    @staticmethod
+    def generate_ref_no():
+        number = randint(100, 1000)
+        return "RF" + str(number)

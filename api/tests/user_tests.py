@@ -1,6 +1,7 @@
 import unittest
 import json
 from api import app
+from api.v1.users.model import users
 
 
 def create_sample_user(f_name, l_name, email, city, phone_no, password):
@@ -60,3 +61,11 @@ class TestUserCases(unittest.TestCase):
         results = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
         self.assertEqual(results, {"remaining_users": []})
+
+    def test_update_users(self):
+        data = json.dumps(self.sample_user)
+        response = self.test_client.put('/api/v1/users/update/1', headers=self.json_headers, data=data)
+        result = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
+        if users:
+            self.assertEqual(result, {"user": self.sample_user})

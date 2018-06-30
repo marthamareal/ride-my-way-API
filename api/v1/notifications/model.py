@@ -1,4 +1,4 @@
-from ..rides.model import RideModel
+from api.v1 import generate_id
 """
 Declare a global variable list which will hold our notifications, initially its empty.
 """
@@ -10,7 +10,7 @@ class NotificationModel:
         """
                 This method acts as a constructor for our class, its used to initialise class attributes
         """
-        self.notification_id = RideModel.generate_id(notifications)
+        self.notification_id = generate_id(notifications)
         self.user_id = user_id
         self.message = message
 

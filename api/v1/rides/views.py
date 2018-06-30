@@ -18,7 +18,6 @@ def get_all_rides():
 @blue_print_rides.route('/api/v1/rides/create/<int:user_id>', methods=['POST'])
 def _create_ride(user_id):
     parser = reqparse.RequestParser()
-    parser.add_argument("ref_no")
     parser.add_argument("date")
     parser.add_argument("time")
     parser.add_argument("source")
@@ -29,7 +28,7 @@ def _create_ride(user_id):
     for user in users:
         if user.get("id") == user_id:
 
-            ride_instance = RideModel(arguments["ref_no"], arguments["date"],
+            ride_instance = RideModel(arguments["date"],
                                       arguments["time"], arguments["source"], arguments["destination"], user_id)
             created_ride = RideModel.create_ride(ride_instance)
 

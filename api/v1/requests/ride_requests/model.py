@@ -1,4 +1,4 @@
-from api.v1.rides.model import RideModel
+from api.v1 import generate_id
 """
      Declare a global variable list which will hold our ride_requests, initially its empty.
 """
@@ -10,7 +10,7 @@ class RideRequestModel:
         """
                This method acts as a constructor for our class, its used to initialise class attributes
         """
-        self.request_id = RideModel.generate_id(ride_requests)
+        self.request_id = generate_id(ride_requests)
         self.user_id = user_id
         self.ride_id = ride_id
         self.status = status
